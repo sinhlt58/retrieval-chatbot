@@ -214,7 +214,8 @@ def find_excluded_groups(group_to_response):
     return r
 
 def is_valid_user_text(text):
-    if "not_text" in text:
+    if not text or\
+       "not_text" in text:
         return False
     return True
 
