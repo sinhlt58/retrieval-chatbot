@@ -4,6 +4,12 @@ import tensorflow as tf
 import sentencepiece as sp
 import pandas as pd
 
+from domain import(
+    MAX_CONTEXT_LENGTH,
+    MAX_RESPONSE_LENGTH,
+    padd_ids,
+)
+
 
 def _int64_feature(list_value):
   """Returns an int64_list from a bool / enum / int / uint."""
@@ -31,8 +37,8 @@ def create_records_for_max_turn(data_folder):
     def gen():
         for idx, row in df.iterrows():
             yield serialize_example(
-                tokenizer.EncodeAsIds(row["context"]),
-                tokenizer.EncodeAsIds(row["response"]),
+                padd_ids(tokenizer.EncodeAsIds(row["context"]), MAX_CONTEXT_LENGTH, left_padding=False), # we use wright padding for Cudnn LSTM :DD
+                padd_ids(tokenizer.EncodeAsIds(row["response"]), MAX_RESPONSE_LENGTH, left_padding=False),
                 [int(row["label"])],
             )
 

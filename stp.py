@@ -23,7 +23,13 @@ if __name__ == "__main__":
                 f' --model_prefix=spm'
                 f' --vocab_size=10000'
                 f' --model_type=word'
+                f' --character_coverage=1.0'
                 f' --hard_vocab_limit=false'
+                # f' --user_defined_symbols=<custom>'
+                f' --unk_id=3'
+                f' --bos_id=1'
+                f' --eos_id=2'
+                f' --pad_id=0'
             )
 
             shutil.move("spm.model", model_file)
@@ -37,6 +43,8 @@ if __name__ == "__main__":
             test_texts = [
                 "chào cô có thể lập cho cháu lick đc ko ạ",
                 "minh muon tao tai khoan __eou__ cho sach mem",
+                "chào sfs sg sf cô <pad> <pad>", # special tokens must be handled outside sentencepiece
+                "<s> cô </s>" # special tokens must be handled outside sentencepiece
             ]
             for test_text in test_texts:
                 ids = sp.EncodeAsIds(test_text)

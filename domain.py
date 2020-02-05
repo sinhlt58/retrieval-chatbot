@@ -10,7 +10,7 @@ import demoji
 from utils import read_json_data, write_json_data
 
 
-demoji.download_codes()
+# demoji.download_codes()
 
 # pre-process and create conversations.json stuff
 class Entity:
@@ -243,3 +243,21 @@ def plot_to_file(df, x_key, rot, figsize, out_folder, file_name):
     fig = ax.get_figure()
     fig.savefig(out_path)
     print (f"Write file {out_path}")
+
+# configs
+MAX_CONTEXT_LENGTH = 300
+MAX_RESPONSE_LENGTH = 256
+UNK_ID = 3
+SOS_ID = 1
+EOS_ID = 2
+PADDING_ID = 0
+
+def padd_ids(ids, max_length, left_padding=True):
+    ids = ids[:max_length]
+    num_padd = max_length - len(ids)
+    padds = num_padd * [PADDING_ID]
+
+    if left_padding:
+        return ids + padds
+    else:
+        return padds + ids
