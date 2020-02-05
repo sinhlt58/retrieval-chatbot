@@ -30,7 +30,7 @@ We try to overfit the train dataset to make sure the model is capable of capturi
 
 Currently, we use the train dataset for evaluating the model (just make sure the code is correct and testing out our workflow) since the dataset is quite small. We don't do cross-validation because it is quite slow. We will create the test set in future work.
 
-Below are the resuls on the train dataset:
+Below are the results on the train dataset:
 
 **baseline**: Logistic Regression model
 
